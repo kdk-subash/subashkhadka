@@ -1,0 +1,31 @@
+clc;close all;clear all;
+%% 
+%acceleration velocity and position plot of the vehicle for 100s.
+t1=linspace(0,30,100);
+dt=diff(t1);
+dt=[dt dt(end)]
+a1=2*ones(1,size(t1,2));
+%initialize velocity at t=0s
+vi=zeros(1,size(t1,2));
+v1=vi+a1.*t1;
+%initialize position at t=0s
+si=zeros(1,size(dt,2));
+s1=si+v1.*t1;
+
+%% 
+t2=linspace(30,60,100);
+dt=diff(t2);
+dt=[dt dt(end)]
+a2=zeros(1,size(t2,2));
+
+vi2=v1(end)*ones(1,size(t2,2));
+v2=vi2+a2.*t2;
+
+si2=s1(end)*zeros(1,size(t2,2));
+s2=si2+v2.*t2;
+
+t=[t1,t2];
+s=[s1 s2];v=[v1 v2];a=[a1 a2];
+
+%% 
+figure(1);plot(t,s,'b','Linewidth',3);xlabel('time in s');ylabel('position in m');figure(2);plot(t,v,'g','Linewidth',3);xlabel('time in s');ylabel('velocity in m/s');figure(3);plot(t,a,'r','Linewidth',3);xlabel('time in s');ylabel('acceleration in m/s^2');
